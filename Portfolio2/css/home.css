@@ -1,0 +1,857 @@
+/* ====== GENERAL ====== */
+/* Fullscreen Background Video */
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2; /* stays behind EVERYTHING */
+    opacity: 0.4; /* adjust for brightness */
+    filter: brightness(0.7) contrast(1.1) saturate(1.2);
+
+}
+body.dark-mode #video-overlay {
+    background: rgba(0,0,0,0.55);
+}
+
+/* A soft dark overlay to improve readability */
+#video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.35); /* balances visibility */
+    z-index: -1;
+}
+
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background-color: #f5f5f5;
+    color: #222;
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* UNIVERSAL NAVBAR CONTAINER */
+.navbar-container {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    padding: 18px 40px;
+    background: rgba(0,0,0,0.9);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    transition: 0.3s ease;
+}
+
+/* SHRINK ON SCROLL */
+.navbar-shrink {
+    padding: 10px 40px;
+    background: rgba(0,0,0,0.98);
+}
+
+/* LOGO */
+.logo {
+    font-size: 34px;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+}
+
+/* NAV LINKS */
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    text-decoration: none;
+    position: relative;
+    padding: 4px 0;
+    transition: 0.3s;
+}
+
+/* Tech Hover Glow */
+.nav-links a:hover {
+    color: #00c3ff;
+    text-shadow: 0 0 5px #00c3ff;
+}
+
+/* Active Page Indicator */
+.nav-links a.active-link {
+    color: #00c3ff;
+    border-bottom: 2px solid #00c3ff;
+}
+
+/* DARK MODE BUTTON */
+.dark-btn {
+    margin-left: 15px;
+    padding: 6px 12px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: none;
+    background: white;
+    color: black;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.dark-btn:hover {
+    background: #00c3ff;
+    color: white;
+}
+
+
+
+/* HAMBURGER MENU (MOBILE) */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+/* MOBILE MENU TRANSFORMATIONS */
+.hamburger.open span:nth-child(1) {
+    transform: rotate(45deg) translateY(8px);
+}
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+    transform: rotate(-45deg) translateY(-8px);
+}
+
+#nav-menu.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 65px;
+    right: 40px;
+    background: rgba(0,0,0,0.95);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+/* RESPONSIVE */
+@media(max-width: 900px) {
+    .nav-links {
+        display: none;
+    }
+    .hamburger {
+        display: flex;
+    }
+}
+
+/* DARK MODE OVERRIDES */
+body.dark-mode {
+    background: black;
+    color: white;
+}
+
+body.dark-mode a {
+    color: white;
+}
+
+body.dark-mode .nav-links a.active-link {
+    color: #00c3ff;
+}
+/* Prevent dark mode from affecting content boxes */
+.dark-mode .box,
+.dark-mode .card,
+.dark-mode .resume-content,
+.dark-mode .others-card,
+.dark-mode .project-card,
+.dark-mode .contact-form-section,
+.dark-mode .footer,
+.dark-mode .content-section {
+    background: white !important;
+    color: black !important;
+}
+
+/* ====== HERO SECTION ====== */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 140px 40px 80px;
+    min-height: 90vh;
+}
+
+.hero-text {
+    max-width: 60%;
+}
+
+.intro-title {
+    font-size: 38px;
+    margin-bottom: -40px;
+    margin-left: 100px;
+}
+
+.intro-subtitle {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    margin-top: -40px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.btn-primary {
+    background: #0077ff;
+    padding: 12px 24px;
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.btn-outline {
+    border: 2px solid #0077ff;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    color: #0077ff;
+}
+
+.btn-primary:hover,
+.btn-outline:hover {
+    opacity: 0.8;
+}
+
+/* ====== VIDEO SECTION ====== */
+.hero-video video {
+    width: 600px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+
+/* ====== FOOTER ====== */
+.footer {
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 40px;
+    background: #111;
+    color: white;
+}
+
+.footer a {
+    color: #4da3ff;
+}
+
+.social-links a {
+    margin: 0 10px;
+}
+
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-text {
+        max-width: 100%;
+    }
+
+    .hero-video video {
+        margin-top: 40px;
+        width: 85%;
+    }
+}
+
+/* =============== ABOUT PAGE STYLES =============== */
+
+.about-root {
+    text-align: center;
+    padding: 150px 40px 40px;
+}
+
+.section-title {
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.about-bio {
+    max-width: 800px;
+    margin: auto;
+    line-height: 1.7;
+    font-size: 20px;
+}
+
+
+
+/* =============== TREE BRANCHES =============== */
+
+.about-branches {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+    gap: 40px;
+}
+
+.branch {
+    width: 48%;
+}
+
+.branch-title {
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+.branch-title{
+margin-left: 880px;
+}
+.skills-list {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 212px;
+    margin-top: 20px;
+}
+
+.skill-btn {
+    width:500%;
+    max-width: 900px;
+    padding: 40px;
+    background: #0077ff;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+    
+
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .about-branches {
+        flex-direction: column;
+    }
+
+    .branch {
+        width: 100%;
+    }
+}
+.clicked {
+    transform: scale(0.97);
+}
+
+/* Pop-up Info Box */
+.info-box {
+    display: none;
+    margin-top: 10px;
+    padding: 15px;
+    background: white;
+    color: black;
+    border-radius: 10px;
+    font-size: 16px;
+    line-height: 1.6;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    animation: fadeIn 0.2s ease-out;
+}
+
+/* Show when active */
+.info-box.active {
+    display: block;
+}
+
+/* Dark mode override */
+.dark-mode .info-box {
+    background: white !important;
+    color: black !important;
+}
+
+/* Fix buttons so box stays aligned */
+.timeline-item, .skill-btn {
+    position: relative;
+}
+
+/*                                */
+
+.info-box {
+    display: none;
+    margin-top: 10px;
+    padding: 15px;
+    background: white;
+    color: black;
+    border-radius: 10px;
+    font-size: 16px;
+    line-height: 1.6;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    animation: fadeIn 0.25s ease;
+}
+
+.info-box.active {
+    display: block;
+}
+
+.dark-mode .info-box {
+    background: white !important;
+    color: black !important;
+}
+
+/* ===================== PROJECT PAGE ===================== */
+
+.project-header {
+    text-align: center;
+    padding: 150px 40px 40px;
+}
+
+.project-subtitle {
+    font-size: 20px;
+    opacity: 0.7;
+    margin-top: -10px;
+}
+
+.project-section {
+    padding: 60px 40px;
+    border-bottom: 1px solid #ddd;
+}
+
+.project-title {
+    font-size: 38px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.project-carousel img {
+    border-radius: 20px;
+    height: 800px;
+    object-fit:fill;
+}
+
+.project-description {
+    max-width: 900px;
+    margin: 25px auto 0;
+    font-size: 20px;
+    line-height: 1.6;
+}
+.carousel-item {
+    max-width: 1500px;
+    margin: 0 auto;
+    display: block;
+    padding: 0 20px;   /* keeps nice spacing on phones */
+    justify-content: center;
+}
+
+/* ===================== RESEARCH PAGE ===================== */
+
+.research-header {
+    text-align: center;
+    padding: 150px 40px 40px;
+}
+
+.research-subtitle {
+    font-size: 20px;
+    opacity: 0.7;
+    margin-top: -10px;
+}
+
+.research-list {
+    padding: 40px;
+    max-width: 2000px;
+    margin: auto;
+}
+
+.research-item {
+    background: white;
+    border-radius: 12px;
+    position: center;
+    padding: 40px;
+    margin-bottom: 35px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    max-width: 1000px;  /* increase width */
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin: 0 auto 30px; /* center the boxes */
+}
+.research-title {
+    font-size: 38px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.research-description {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.research-btn {
+    padding: 12px 24px;
+    font-size: 20px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+@media (max-width: 850px) {
+    .research-item {
+        padding: 20px;
+    }
+}
+
+.video-thumb {
+    width: 100%;
+    border-radius: 12px;
+    display: block;
+}
+
+.play-btn {
+    width: 80px;
+    height: 80px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.play-btn::before {
+    content: "";
+    position: absolute;
+    left: 32px;
+    top: 22px;
+    border-style: solid;
+    border-width: 18px 0 18px 28px;
+    border-color: transparent transparent transparent white;
+}
+
+
+/* ===================== RESUME PAGE ===================== */
+
+.resume-container {
+    padding: 150px 40px 60px;
+    max-width: 1500px;
+    margin: auto;
+}
+
+.resume-title {
+    text-align: center;
+    font-size: 38px;
+    margin-bottom: 40px;
+}
+
+.resume-content {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    line-height: 1.7;
+    font-size: 20px;
+}
+
+
+
+/* ========== FLOATING DOWNLOAD BUTTON ========== */
+.floating-download-btn {
+    position: fixed;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #0077ff;
+    color: white;
+    padding: 15px 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    z-index: 999;
+    text-decoration: none;
+    animation: pulse 1.8s infinite ease-in-out;
+}
+
+.floating-download-btn:hover {
+    opacity: 0.85;
+}
+
+
+/* Blinking/Pulsing Effect */
+@keyframes pulse {
+    0% { transform: translateY(-50%) scale(1); }
+    50% { transform: translateY(-50%) scale(1.06); }
+    100% { transform: translateY(-50%) scale(1); }
+}
+
+@media(max-width: 850px) {
+    .floating-download-btn {
+        right: 10px;
+        padding: 12px 16px;
+    }
+}
+
+/* ===================== CONTACT PAGE ===================== */
+
+.contact-header {
+    text-align: center;
+    padding: 150px 40px 40px;
+}
+
+.contact-subtitle {
+    font-size: 20px;
+    opacity: 0.8;
+}
+
+.contact-info {
+    text-align: center;
+    padding: 20px 40px 30px;
+    font-size: 20px;
+}
+
+.contact-buttons {
+    margin-top: 20px;
+}
+
+.contact-btn {
+    background: #0077ff;
+    padding: 12px 22px;
+    margin: 5px;
+    color: white;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0px 3px 8px rgba(0,0,0,0.15);
+}
+
+.contact-btn:hover {
+    opacity: 0.85;
+}
+
+.contact-form-section {
+    max-width: 1500px;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
+    font-size: 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.form-status {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+/* FINAL FIX — Protect Research Page Boxes in Dark Mode */
+.dark-mode .research-item,
+.dark-mode .research-item *,
+.dark-mode .research-title,
+.dark-mode .research-description,
+.dark-mode .research-btn {
+    background: white !important;
+    color: black !important;
+    border-color: black !important;
+}
+/* Smooth page transition states */
+body.page-loaded {
+    opacity: 1;
+}
+
+body.page-fade-out {
+    opacity: 0;
+}
+/* ===== RANDOM SLIDE TRANSITIONS ===== */
+
+/* Smooth transformation */
+body {
+    transition: transform 0.9s ease;
+    transform: translateX(0);
+}
+
+/* START positions (when a page is first loaded) */
+body.slide-start-left {
+    transform: translateX(-100%);
+}
+body.slide-start-right {
+    transform: translateX(100%);
+}
+body.slide-start-top {
+    transform: translateY(-100%);
+}
+body.slide-start-bottom {
+    transform: translateY(100%);
+}
+
+/* END positions (slide into place) */
+body.slide-in {
+    transform: translateX(0) translateY(0);
+}
+
+/* OUTGOING transitions */
+body.slide-out-left {
+    transform: translateX(-100%);
+}
+body.slide-out-right {
+    transform: translateX(100%);
+}
+body.slide-out-top {
+    transform: translateY(-100%);
+}
+body.slide-out-bottom {
+    transform: translateY(100%);
+}
+
+/* Overlay to hide white flash */
+#transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;     /* or rgba(0,0,0,0.7) */
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+/* Activate overlay on page exit */
+#transition-overlay.active {
+    opacity: 1;
+}
+
+/* Make footer links visible in dark mode */
+.dark-mode .footer a {
+    color: #4da3ff !important;   /* bright blue */
+    text-shadow: 0 0 6px rgba(77,163,255,0.8);
+}
+
+.home-profile {
+    width: 300px;
+    height: 390px;
+    margin: 50px;
+    object-fit: cover;
+    margin-bottom: 35px;
+}
+.dark-mode .home-profile {
+    filter: brightness(1.1) contrast(1.2);
+}
+.home-profile {
+    transition: 0.3s ease;
+}
+.home-profile:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 18px #00c3ff;
+}
+/* 3D Cube Container */
+.cube-container {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    margin: 100px auto;
+    perspective: 900px;
+}
+
+/* Cube base */
+.cube {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 11s ease;
+}
+
+/* Each Cube Face */
+.cube .face {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: #000;
+    border: 2px solid #111;
+}
+
+.cube .face img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Positioning Each Face */
+.front  { transform: rotateY(0deg) translateZ(150px); }
+.back   { transform: rotateY(180deg) translateZ(150px); }
+.right  { transform: rotateY(90deg) translateZ(150px); }
+.left   { transform: rotateY(-90deg) translateZ(150px); }
+.top    { transform: rotateX(90deg) translateZ(150px); }
+.bottom { transform: rotateX(-90deg) translateZ(150px); }
+
+@media (max-width: 600px) {
+    .cube-container {
+        width: 220px;
+        height: 220px;
+    }
+    .cube .face {
+        width: 220px;
+        height: 220px;
+    }
+}
+
+@media (max-width: 600px) {
+    .cube-container {
+        width: 220px;
+        height: 220px;
+    }
+    .cube .face {
+        width: 220px;
+        height: 220px;
+    }
+}
+
+/*     */
+
+/* Cube container hover improves pointer control */
+.cube-container {
+    cursor: grab;
+}
+
+.cube-container:active {
+    cursor: grabbing;
+}
+
+/* Smooth manual rotation */
+.cube {
+    transition: transform 10s ease;
+}

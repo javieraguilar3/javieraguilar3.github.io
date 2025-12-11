@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research | Javier Aguilar</title>
+
+    <link rel="stylesheet" href="css/home.css">
+    <script defer src="js/script.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Play Button Styling */
+        .play-btn {
+            width: 80px;
+            height: 80px;
+            background: rgba(0,0,0,0.55);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .play-btn::before {
+            content: "";
+            position: absolute;
+            left: 32px;
+            top: 22px;
+            border-style: solid;
+            border-width: 18px 0 18px 28px;
+            border-color: transparent transparent transparent white;
+        }
+
+        .video-wrapper {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .video-thumb {
+            width: 100%;
+            display: block;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Background Video -->
+<video autoplay muted loop playsinline id="bg-video">
+    <source src="video/blutechvid.mp4" type="video/mp4">
+</video>
+
+<!-- NAVBAR -->
+<div data-include="navbar.html"></div>
+
+<!-- ===================== HEADER ===================== -->
+<section class="research-header">
+    <h1 class="section-title">Research Projects</h1>
+    <h5 class="research-subtitle">Innovations in FPGA design and theoretical physics.</h5>
+</section>
+
+
+
+<!-- ===================== START RESEARCH LIST ===================== -->
+<section class="research-list">
+
+
+
+<!-- ██████████████████████████████████████████████ -->
+<!--                FPGA RESEARCH                  -->
+<!-- ██████████████████████████████████████████████ -->
+<div class="research-item">
+
+    <h2 class="research-title">FPGA Research: Smart Temperature Monitoring System</h2>
+
+    <p class="research-description">
+        A real-time temperature monitoring system built using the DE10-Lite FPGA,
+        the Nios II soft-core processor, and DHT11/LM35 sensors. The research explores
+        hardware–software co-design, interrupt-driven processing, and embedded optimization.
+    </p>
+
+    <!-- PDF Button -->
+    <a href="pdf/ELEG 4325 Embedded Systems Design Final Project by Javier Aguilar.pdf"
+       class="btn-primary research-btn" target="_blank">
+        View Research PDF
+    </a>
+
+    <!-- FPGA VIDEO WITH THUMBNAIL -->
+    <div style="margin-top:25px; text-align:center;">
+        <h3 style="margin-bottom:15px;">Short Research Video</h3>
+
+        <div class="ratio ratio-16x9" style="border-radius:12px; overflow:hidden;">
+            <video controls preload="none"
+                   poster="image/fpgathumbnail.JPG"
+                   style="width:100%; height:100%; object-fit:cover;">
+                <source src="video/hardwareprogram.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+            </video>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- ██████████████████████████████████████████████ -->
+<!--                DPT RESEARCH                   -->
+<!-- ██████████████████████████████████████████████ -->
+<div class="research-item">
+
+    <h2 class="research-title">Research: Dimensional Physics Theory (DPT)</h2>
+
+    <p class="research-description">
+        A theoretical physics model proposing new relationships between curvature,
+        energy, and multi-dimensional interactions. The research includes simulations,
+        mathematical derivations, and visualizations used to explore gravitational
+        behavior beyond standard models.
+    </p>
+
+    <!-- PDF Button -->
+    <a href="pdf/DPT by Javier Aguilar1 (1).pdf"
+       class="btn-primary research-btn" target="_blank">
+        View Research PDF
+    </a>
+
+    <!-- DPT VIDEO WITH CUSTOM THUMBNAIL -->
+    <div style="margin-top:25px; text-align:center;">
+        <h3 style="margin-bottom:15px;">Watch Theory Presentation</h3>
+
+        <!-- THUMBNAIL -->
+        <div class="video-wrapper" onclick="loadDPTvideo()">
+            <img src="image/assis.jpg" class="video-thumb">
+            <div class="play-btn"></div>
+        </div>
+
+        <!-- This is where the real video loads -->
+        <div id="dpt-video-container" class="ratio ratio-16x9"
+             style="display:none; margin-top:15px;"></div>
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+    <p>© 2025 Javier Aguilar. All Rights Reserved.</p>
+    <p>Email: <a href="mailto:jak369pro@gmail.com">jak369pro@gmail.com</a></p>
+
+    <div class="social-links">
+        <a href="https://github.com/javieraguilar3" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/javier-aguilar-675886377" target="_blank">LinkedIn</a>
+    </div>
+</footer>
+
+
+<!-- ===================== VIDEO LOADER SCRIPT ===================== -->
+<script>
+function loadDPTvideo() {
+    // Hide thumbnail wrapper
+    document.querySelector(".video-wrapper").style.display = "none";
+
+    // Reveal container
+    const container = document.getElementById("dpt-video-container");
+    container.style.display = "block";
+
+    // Load YouTube iframe with autoplay
+    container.innerHTML = `
+        <iframe 
+            src="https://www.youtube.com/embed/YYYYYYYYYYY?autoplay=1"
+            style="width:100%; height:100%; border:0;"
+            allowfullscreen>
+        </iframe>
+    `;
+}
+</script>
+
+</body>
+</html>
