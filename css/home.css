@@ -186,7 +186,7 @@ body.dark-mode .nav-links a.active-link {
 .dark-mode .others-card,
 .dark-mode .project-card,
 .dark-mode .contact-form-section,
-.dark-mode .footer,
+
 .dark-mode .content-section {
     background: white !important;
     color: black !important;
@@ -230,6 +230,15 @@ body.dark-mode .nav-links a.active-link {
     border-radius: 8px;
     font-weight: 600;
 }
+.hero-buttons a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+.hero-buttons a:hover {
+    text-decoration: none;
+}
+
 
 .btn-outline {
     border: 2px solid #0077ff;
@@ -574,8 +583,15 @@ margin-left: 880px;
     line-height: 1.7;
     font-size: 20px;
 }
+/* Resume/CV: make links visible inside the white content box */
+.resume-content a {
+    color: #0077ff !important;
+    text-decoration: underline;
+}
 
-
+.resume-content a:hover {
+    opacity: 0.85;
+}
 
 /* ========== FLOATING DOWNLOAD BUTTON ========== */
 .floating-download-btn {
@@ -855,3 +871,12 @@ body.slide-out-bottom {
 .cube {
     transition: transform 10s ease;
 }
+.btn-primary {
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    text-decoration: none;
+}
+
