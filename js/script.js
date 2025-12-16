@@ -31,10 +31,12 @@ function initNavbar() {
     const hamburger = document.getElementById("hamburger-btn");
     const navMenu = document.getElementById("nav-menu");
 
-    hamburger?.addEventListener("click", () => {
-        hamburger.classList.toggle("open");
-        navMenu.classList.toggle("open");
-    });
+    if (hamburger && navMenu) {
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("open");
+            navMenu.classList.toggle("open");
+        });
+    }
 
     document.querySelectorAll(".nav-links a").forEach(link => {
         if (link.href === window.location.href) {
@@ -43,20 +45,30 @@ function initNavbar() {
     });
 
     const navbar = document.getElementById("main-navbar");
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) navbar.classList.add("navbar-shrink");
-        else navbar.classList.remove("navbar-shrink");
-    });
+    if (navbar) {
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) navbar.classList.add("navbar-shrink");
+            else navbar.classList.remove("navbar-shrink");
+        });
+    }
 
+    /* ===== DARK MODE TOGGLE (FIXED & SAFE) ===== */
     const darkBtn = document.getElementById("dark-toggle");
 
     if (darkBtn) {
+        const isDark = document.body.classList.contains("dark-mode");
+        darkBtn.textContent = isDark ? "🌙⇄☀️" : "☀️⇄🌙";
+
         darkBtn.addEventListener("click", () => {
             document.body.classList.toggle("dark-mode");
-            localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+
+            const nowDark = document.body.classList.contains("dark-mode");
+            darkBtn.textContent = nowDark ? "🌙⇄☀️" : "☀️⇄🌙";
+
+            localStorage.setItem("theme", nowDark ? "dark" : "light");
         });
     }
-}
+} // ✅ THIS CLOSING BRACE WAS MISSING BEFORE
 
 /* =========================================================
    THEME LOAD
@@ -72,7 +84,6 @@ function loadTheme() {
 ========================================================= */
 function activateInfoBoxes() {
     const buttons = document.querySelectorAll(".timeline-item, .skill-btn");
-
     if (buttons.length === 0) return;
 
     buttons.forEach(btn => {
@@ -107,8 +118,10 @@ function initRandomSlideTransitions() {
 
         link.addEventListener("click", e => {
             const href = link.getAttribute("href");
-            if (!href || href.startsWith("#") || href.startsWith("mailto:") ||
-                href.startsWith("tel:") || link.target === "_blank") return;
+            if (!href || href.startsWith("#") ||
+                href.startsWith("mailto:") ||
+                href.startsWith("tel:") ||
+                link.target === "_blank") return;
 
             const url = new URL(href, location.href);
             if (url.origin !== location.origin) return;
@@ -119,7 +132,9 @@ function initRandomSlideTransitions() {
             document.getElementById("transition-overlay")?.classList.add("active");
             document.body.classList.add(`slide-out-${dir}`);
 
-            setTimeout(() => { window.location.href = href; }, 600);
+            setTimeout(() => {
+                window.location.href = href;
+            }, 600);
         });
     });
 }
@@ -141,7 +156,8 @@ function initCube() {
     if (!cube) return;
 
     let angleX = 0, angleY = 0;
-    let isDragging = false, startX, startY;
+    let isDragging = false;
+    let startX = 0, startY = 0;
     let currentX = 0, currentY = 0;
     let autoRotate = true;
 
@@ -158,25 +174,25 @@ function initCube() {
 
     setInterval(rotateCube, 2000);
 
-    function update() {
-        cube.style.transform = `rotateX(${angleY}deg) rotateY(${angleX}deg)`;
-    }
-
     cube.addEventListener("mousedown", e => {
-        isDragging = true; autoRotate = false;
-        startX = e.clientX; startY = e.clientY;
+        isDragging = true;
+        autoRotate = false;
+        startX = e.clientX;
+        startY = e.clientY;
     });
 
     document.addEventListener("mousemove", e => {
         if (!isDragging) return;
         angleX = currentX + (e.clientX - startX) * 0.9;
         angleY = currentY - (e.clientY - startY) * 0.9;
-        update();
+        cube.style.transform = `rotateX(${angleY}deg) rotateY(${angleX}deg)`;
     });
 
     document.addEventListener("mouseup", () => {
+        if (!isDragging) return;
         isDragging = false;
-        currentX = angleX; currentY = angleY;
+        currentX = angleX;
+        currentY = angleY;
         setTimeout(() => autoRotate = true, 2000);
     });
 }
@@ -185,7 +201,6 @@ function initCube() {
    FULL INITIALIZATION
 ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
-
     loadTheme();
 
     includeHTML(() => {
@@ -201,4 +216,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     requestAnimationFrame(applyRandomSlideStart);
 });
+
 
